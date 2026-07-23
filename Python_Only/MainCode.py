@@ -46,10 +46,12 @@ triplets = [#unlike a formal risk triplet here the probability goes last
 #%% ADD Demo
 knowledge_graph = nx.DiGraph()#Initialize new directional graph
 
-#knowledge_graph=add_triplet(knowledge_graph,('Event1','Consequence1',{'p':0.01})) #Single function broken, can be done manually
-knowledge_graph.addedge(('no_event', 'gas_leak', {'p':0.01}))
+knowledge_graph=add_triplet(knowledge_graph,('no_event', 'gas_leak', {'p':0.01})) #single add
+knowledge_graph=add_triplets(knowledge_graph,triplets) #multiple add
 
-knowledge_graph=add_triplets(knowledge_graph,triplets)
+#Add attribute severity. Same format can be used for other attributes. Follow Schema:
+for event_consequence, metadata in events.items():
+    knowledge_graph.add_node(event_consequence, **metadata)
 
 #%%Calculate Total Probability
 interest_node='package_damaged'
