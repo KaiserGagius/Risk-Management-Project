@@ -17,8 +17,8 @@ def add_triplet(knowledge_graph,input_triplet):
     event_consequence,probability_dict=check_risk_triplet(input_triplet)
     
     knowledge_graph.add_node(event_consequence)
-    knowledge_graph.add_edge(input_triplet) #TO-DO: FIX!!!!!!!!!
-    
+    #knowledge_graph.add_edge(event_consequence,probability_dict) #not working
+    knowledge_graph.add_edge(event_consequence[0],event_consequence[1],p=list(probability_dict.values())[0])#ugly but works
     return knowledge_graph
 
 def add_triplets(knowledge_graph,input_triplets,input_events=[]):
